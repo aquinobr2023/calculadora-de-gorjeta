@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green-100:#f3f9fa;
+    --grenn-200:#c5e4e7;
+    --grenn-300:#9EBBBD;
+    --grenn-400:#7F9D9f;
+    --grenn-500:#5e747d;
+    --grenn-600:#547878;
+    --grenn-700:#3d6666;
+    --grenn-800:#00474b;
+    --light-green :#26c3ae;
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--grenn-200);
+
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding-block: 2.8rem;
+}
