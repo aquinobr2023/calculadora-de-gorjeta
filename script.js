@@ -1,19 +1,22 @@
 let conta = 0
-let pessoa = 0
+let pessoas = 0
+let porcentagem = 0     
+
 
 const contaInput = document.querySelector("#conta")
 contaInput.addEventListener("input", receberValorConta )
 
 function receberValorConta(evento) {
     conta = Number(evento.terget.value)
+    calcular()
 }
 
-const pessoaInput = document.querySelector("#pessoas")
-pessoaInput.addEventListener("input", recberQuantidadePessoas)
+const pessoasInput = document.querySelector("#pessoas")
+pessoasInput.addEventListener("input", recberQuantidadePessoas)
 
-function recberQunatidadePessoas(evento) {
+function recberQuantidadePessoas(evento) {
     const paragrafoErro = document.querySelector(".pessoas #erro")
-    const divErro = document.querySelector(".pessoaa .input-box")
+    const divErro = document.querySelector(".pessoas .input-box")
 
 
 
@@ -23,8 +26,10 @@ function recberQunatidadePessoas(evento) {
     } else   {
         paragrafoErro.style.display = "none"
         divErro.setAttribute("id", "")
-        pessoa = Number(evento.terget.value)
+        pessoas = Number(evento.terget.value)
     }
+
+    calcular()
 }
 
 const botoesGorjeta = document.querySelectorAll(".gorjeta input[type='button']")
@@ -48,8 +53,34 @@ function receberPorcentagem(evento){
         porcentagem = 0
     }
 
-    console.log(porcentagem)
+    calcular()
 }
 
 const gorjetaInput = document.querySelector("#outra")
 gorjetaInput.addEventListener("input",receberPorcentagem)
+
+function calcular () {
+    if(conta !== 0 && porcentagem !== 0 && pessoas !== 0 ){
+        const strongGorjetaTotal = document.querySelector(".gorjeta-total > strong")
+        strongGorjetaTotal.innerHTML = `R$  ${(conta * porcentagem / pessoas) .toFixed(2)}`
+
+        const strongTotal = document.querySelector(".total > strong")
+        strongTotal.innerHTML = `R$ ${((conta + (conta *porcentagem)) /pessoas).toFixed(2)}`
+    }
+}
+
+const botaoLimpar = document.querySelector(".resultados button")
+botaoLimpar.addEventListener("click", limpar)
+function limpar() {
+    contaInput.value = ""
+    botoesGorjeta.forEach(botao => {
+        botao.classList.remove("botao-ativo")
+    })
+
+    gorjetaInput.value = ""
+     
+    pessoasInput.value = ""
+
+     document.querySelector(".gorjeta-total > strong").innerHTML = "R$ 0.00"
+     document.querySelector(".total > strong").innerHTML = "R$ 0.00"
+}
